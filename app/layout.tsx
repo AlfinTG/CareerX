@@ -1,6 +1,9 @@
-export const metadata = {
-  title: "CareerX",
-  description: "Career Path Simulator",
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "CareerX — Three Futures, One Student",
+  description: "AI-powered career path simulator for college students",
 };
 
 export default function RootLayout({
@@ -10,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-gray-950 text-white antialiased">
+        {children}
+      </body>
     </html>
   );
 }
