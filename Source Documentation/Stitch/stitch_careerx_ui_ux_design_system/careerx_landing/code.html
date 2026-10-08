@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error": "#ba1a1a", "inverse-surface": "#302f3b", "secondary-fixed": "#e2dfff", "on-tertiary-container": "#40a796", "surface-container-high": "#e9e6f6", "tertiary-fixed": "#91f4e1", "tertiary-container": "#00362f", "on-primary-fixed": "#14095c", "primary": "#13075b", "tertiary": "#001f1a", "on-tertiary-fixed": "#00201b", "surface-variant": "#e3e1f0", "background": "#fcf8ff", "primary-fixed-dim": "#c4c0ff", "on-surface-variant": "#474551", "on-primary": "#ffffff", "on-error": "#ffffff", "surface-container": "#efecfc", "surface-dim": "#dbd8e8", "primary-container": "#29236f", "secondary-container": "#4b3bff", "surface-bright": "#fcf8ff", "surface-container-low": "#f5f2ff", "surface": "#fcf8ff", "secondary": "#2f05ea", "on-secondary-container": "#dbd8ff", "on-secondary-fixed-variant": "#2d00e5", "primary-fixed": "#e3dfff", "on-secondary": "#ffffff", "on-primary-fixed-variant": "#413d88", "on-error-container": "#93000a", "inverse-primary": "#c4c0ff", "surface-container-highest": "#e3e1f0", "on-tertiary-fixed-variant": "#005046", "surface-tint": "#5955a2", "on-surface": "#1b1b26", "secondary-fixed-dim": "#c3c0ff", "error-container": "#ffdad6", "inverse-on-surface": "#f2efff", "tertiary-fixed-dim": "#75d8c5", "on-tertiary": "#ffffff", "on-secondary-fixed": "#0f0069", "outline": "#787682", "surface-container-lowest": "#ffffff", "on-background": "#1b1b26", "outline-variant": "#c8c5d2", "on-primary-container": "#928edf" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "1.5rem", "space-md": "0.75rem", "space-3xl": "3rem", "space-xxs": "0.125rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-lg": "1rem", "space-2xl": "2rem", "margin": "2rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "gutter": "1.25rem" }, fontFamily: { "body-lg": ["Inter"], "headline-lg": ["Inter"], "display": ["Inter"], "code": ["Inter"], "label-sm": ["Inter"], "headline-sm": ["Inter"], "headline-md": ["Inter"], "display-mobile": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "eyebrow": ["Inter"] }, fontSize: { "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "code": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }], "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "eyebrow": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(27,27,38,0.04)]"><div class="h-14 px-margin-mobile flex items-center justify-between"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-primary-container select-none">CareerX</span><span class="sr-only">Landing</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 w-full bg-surface pt-14 pb-safe flex flex-col min-h-screen"><div class="flex flex-col w-full">
+<div class="px-margin-mobile pt-space-md pb-space-2xl flex flex-col space-y-space-xl">
+<!-- Hero Header Unit -->
+<div class="flex flex-col items-start pt-space-xs">
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-secondary-fixed text-primary-container shadow-sm mb-space-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-eyebrow text-eyebrow uppercase tracking-widest font-semibold">Visual Career Simulator</span>
+</div>
+<h1 class="font-display-mobile text-display-mobile tracking-tight text-on-surface">
+        Three futures.<br/>One you.
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-sm leading-relaxed">
+        Tell us where you are today. See three realistic paths, and what each one asks of you.
+      </p>
+<p class="font-body-sm text-body-sm text-outline italic mt-space-xs">
+        Your future doesn't have to start with one perfect answer.
+      </p>
+</div>
+<!-- Branching Simulator Visual Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-space-sm">
+<span class="font-eyebrow text-eyebrow uppercase tracking-wider text-outline font-semibold">Live Projection Engine</span>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="font-code text-code text-[10px]">Model v4.2</span>
+</div>
+</div>
+<!-- Branching Architecture SVG Canvas -->
+<div class="relative w-full py-space-xs flex flex-col items-center">
+<!-- Root Node: You Today -->
+<div class="z-10 flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 rounded-full shadow-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-surface-container-lowest"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">You Today</span>
+<span class="font-code text-code text-[11px] text-on-surface-variant bg-surface-container px-1.5 py-0.2 rounded">Year 2</span>
+</div>
+<!-- Flow Lines SVG -->
+<div class="w-full h-20 -my-1">
+<svg class="w-full h-full overflow-visible" fill="none" preserveaspectratio="none" viewbox="0 0 320 80">
+<!-- Left path to Full Stack -->
+<path d="M 160 4 C 160 38, 52 32, 52 76" stroke="#413d88" stroke-dasharray="3 3" stroke-linecap="round" stroke-width="2"></path>
+<!-- Center path to AI/ML -->
+<path d="M 160 4 C 160 38, 160 38, 160 76" stroke="#005046" stroke-linecap="round" stroke-width="2"></path>
+<!-- Right path to Data Eng -->
+<path d="M 160 4 C 160 38, 268 32, 268 76" stroke="#787682" stroke-dasharray="3 3" stroke-linecap="round" stroke-width="2"></path>
+<!-- Nodes anchor points -->
+<circle cx="52" cy="76" fill="#413d88" r="3"></circle>
+<circle cx="160" cy="76" fill="#005046" r="3"></circle>
+<circle cx="268" cy="76" fill="#787682" r="3"></circle>
+</svg>
+</div>
+<!-- Projection Branch Targets -->
+<div class="grid grid-cols-3 gap-space-xs w-full pt-1">
+<!-- Left: Full Stack -->
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-col items-center text-center shadow-xs">
+<span class="font-eyebrow text-[10px] uppercase font-bold text-primary-container tracking-tight">Full Stack</span>
+<div class="mt-1 flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[13px] text-primary-container" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-code text-code font-semibold text-on-surface">84</span>
+</div>
+<span class="font-code text-[10px] text-on-surface-variant mt-1">+12 skills</span>
+</div>
+<!-- Center: AI / ML Eng -->
+<div class="bg-surface-container-high p-2 rounded-lg flex flex-col items-center text-center shadow-xs">
+<span class="font-eyebrow text-[10px] uppercase font-bold text-on-tertiary-fixed-variant tracking-tight">AI/ML Eng</span>
+<div class="mt-1 flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[13px] text-on-tertiary-fixed-variant" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-code text-code font-semibold text-on-surface">71</span>
+</div>
+<span class="font-code text-[10px] text-on-surface-variant mt-1">+18 skills</span>
+</div>
+<!-- Right: Data Eng -->
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-col items-center text-center shadow-xs">
+<span class="font-eyebrow text-[10px] uppercase font-bold text-on-surface-variant tracking-tight">Data Eng</span>
+<div class="mt-1 flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-code text-code font-semibold text-on-surface">58</span>
+</div>
+<span class="font-code text-[10px] text-on-surface-variant mt-1">+15 skills</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-outline">timeline</span>
+<span class="font-body-sm text-body-sm">4-Year horizon modeling</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Dynamic weights</span>
+</div>
+</div>
+<!-- Interactive Simulation Preview Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-eyebrow text-eyebrow uppercase tracking-wider text-outline">Preset Blueprint</span>
+<p class="font-headline-sm text-headline-sm text-on-surface">Sample Career Trajectory</p>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-[20px]">tune</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col">
+<span class="font-eyebrow text-[10px] uppercase text-outline">Target Role</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Distributed Sys</span>
+<div class="mt-2 flex items-center gap-1">
+<div class="h-1.5 w-12 rounded-full bg-secondary-fixed overflow-hidden">
+<div class="h-full bg-secondary-container w-4/5 rounded-full"></div>
+</div>
+<span class="font-code text-code text-[11px] text-on-surface-variant">80% fit</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col">
+<span class="font-eyebrow text-[10px] uppercase text-outline">Est. Time to Market</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">14 Months</span>
+<div class="mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-on-tertiary-container">check_circle</span>
+<span class="font-code text-code text-[11px] text-on-surface-variant">4 milestones</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Actions -->
+<div class="flex flex-col space-y-space-sm pt-space-xs">
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-xl shadow-sm flex items-center justify-center gap-2 transition-colors active:scale-[0.99]" id="start-simulation-btn" type="button">
+<span>Start Simulation</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="w-full h-12 bg-surface-container-lowest text-primary-container font-label-md text-label-md font-semibold rounded-xl shadow-xs flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors active:scale-[0.99]" id="sample-profile-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">play_circle</span>
+<span>Try Example Profile (CS Sophomore)</span>
+</button>
+</div>
+<!-- How It Works Section -->
+<div class="flex flex-col space-y-space-sm pt-space-sm">
+<span class="font-eyebrow text-eyebrow uppercase tracking-wider text-outline font-semibold px-space-xs">
+        How It Works
+      </span>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col space-y-space-lg">
+<!-- Step 01 -->
+<div class="flex items-start gap-space-md">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed text-primary-container font-code text-code font-semibold flex items-center justify-center shrink-0">
+            01
+          </div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Tell us about you</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Share your current year, foundational skills, and primary career interests.
+            </p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-container"></div>
+<!-- Step 02 -->
+<div class="flex items-start gap-space-md">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-code text-code font-semibold flex items-center justify-center shrink-0">
+            02
+          </div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">See three futures</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Explore three realistic directions with transparent skill gap scores and tradeoffs.
+            </p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-container"></div>
+<!-- Step 03 -->
+<div class="flex items-start gap-space-md">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant font-code text-code font-semibold flex items-center justify-center shrink-0">
+            03
+          </div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Pick a path &amp; start</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Get an actionable 4-year technical blueprint paired with an immediate 30-day checklist.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Editorial Trust Indicator -->
+<div class="flex items-center justify-center gap-space-xs py-space-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[17px] text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-body-sm text-body-sm">Takes under a minute. No account needed.</span>
+</div>
+</div>
+<script>
+    (function initLandingInteractions() {
+      const startBtn = document.getElementById('start-simulation-btn');
+      const sampleBtn = document.getElementById('sample-profile-btn');
+
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          const originalContent = startBtn.innerHTML;
+          startBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>
+            <span>Initializing Studio...</span>
+          `;
+          setTimeout(() => {
+            startBtn.innerHTML = originalContent;
+          }, 800);
+        });
+      }
+
+      if (sampleBtn) {
+        sampleBtn.addEventListener('click', () => {
+          const originalText = sampleBtn.innerHTML;
+          sampleBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px] text-on-tertiary-container">done</span>
+            <span>Profile Applied: CS Sophomore</span>
+          `;
+          setTimeout(() => {
+            sampleBtn.innerHTML = originalText;
+          }, 1200);
+        });
+      }
+    })();
+  </script>
+</div></main></body></html>
