@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import type { SimulationResult, CareerPath, SkillGap } from "@/lib/schema";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <>
       <div className="bg-ambient" aria-hidden="true" />
-      <div style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
+      <div className="relative z-10 min-h-screen flex flex-col">
         {state === "landing" && (
           <LandingPage onStart={() => setState("profile")} onTryExample={() => setState("profile")} />
         )}
@@ -75,7 +75,7 @@ export default function HomePage() {
           <ResultsPage
             result={result}
             source={source}
-            onSelectPath={(p: CareerPath) => {
+            onSelectPath={(p) => {
               setSelectedPath(p);
               setState("detail");
             }}
@@ -91,61 +91,38 @@ export default function HomePage() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SHARED UI ATOMS & ICONS
+   SHARED UI ATOMS & ICONS (LIGHT THEME)
 ══════════════════════════════════════════════════════════════════ */
 function Logo() {
   return (
-    <span
-      style={{
-        fontWeight: 900, fontSize: "1.35rem", letterSpacing: "-0.03em",
-        background: "linear-gradient(135deg,#818cf8 0%,#a78bfa 55%,#67e8f9 100%)",
-        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-      }}
-    >
-      CareerX
+    <span className="font-black text-2xl tracking-tighter text-[#13075B]">
+      Career<span className="text-[#2F05EA]">X</span>
     </span>
   );
 }
 
 function NavBar({ right }: { right?: React.ReactNode }) {
   return (
-    <nav
-      style={{
-        position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center",
-        justifyContent: "space-between", padding: "0 1.5rem", height: "64px",
-        background: "rgba(3,5,10,0.6)", backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.05)",
-      }}
-    >
+    <nav className="sticky top-0 z-50 flex items-center justify-between px-6 lg:px-12 h-20 bg-[#FCF8FF]/80 backdrop-blur-2xl border-b border-[#787682]/10">
       <Logo />
       <div>{right}</div>
     </nav>
   );
 }
 
-function PrimaryButton({ children, onClick, disabled, type = "button", style }: { children: React.ReactNode, onClick?: () => void, disabled?: boolean, type?: "button"|"submit", style?: React.CSSProperties }) {
-  const [hovered, setHovered] = useState(false);
+function PrimaryButton({ children, onClick, disabled, type = "button", className = "" }: { children: React.ReactNode, onClick?: () => void, disabled?: boolean, type?: "button"|"submit", className?: string }) {
   return (
     <button
       type={type} onClick={onClick} disabled={disabled}
-      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      style={{
-        display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
-        padding: "0.875rem 2rem", borderRadius: "0.75rem", border: "none",
-        cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.4 : 1,
-        fontWeight: 600, fontSize: "1rem", color: "#fff",
-        background: hovered && !disabled ? "linear-gradient(135deg,#7c3aed,#4f46e5)" : "linear-gradient(135deg,#6366f1,#7c3aed)",
-        boxShadow: hovered && !disabled ? "0 0 24px rgba(99,102,241,0.5)" : "0 4px 16px rgba(99,102,241,0.2)",
-        transform: hovered && !disabled ? "translateY(-1px)" : "none",
-        transition: "all 200ms cubic-bezier(0.4,0,0.2,1)", letterSpacing: "-0.01em", ...style,
-      }}
+      className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 ${disabled ? 'opacity-40 cursor-not-allowed bg-[#787682]' : 'cursor-pointer hover:-translate-y-0.5 hover:shadow-xl bg-[#13075B] hover:bg-[#2F05EA] shadow-md'} ${className}`}
+      style={{ letterSpacing: "-0.01em" }}
     >
       {children}
     </button>
   );
 }
 
-function RadialGauge({ score, size = 96, stroke = 8, color = "#8b5cf6", delay = 0 }: { score: number, size?: number, stroke?: number, color?: string, delay?: number }) {
+function RadialGauge({ score, size = 96, stroke = 8, color = "#2F05EA", delay = 0 }: { score: number, size?: number, stroke?: number, color?: string, delay?: number }) {
   const r = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
   const [offset, setOffset] = useState(circ);
@@ -158,43 +135,52 @@ function RadialGauge({ score, size = 96, stroke = 8, color = "#8b5cf6", delay = 
   }, [score, circ, delay]);
 
   return (
-    <div style={{ position: "relative", width: size, height: size, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth={stroke} />
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#EFECFC" strokeWidth={stroke} />
         <circle
           cx={size/2} cy={size/2} r={r} fill="none" stroke={color}
           strokeWidth={stroke} strokeLinecap="round"
           strokeDasharray={circ} strokeDashoffset={offset}
-          style={{ transition: "stroke-dashoffset 1.5s cubic-bezier(0.16,1,0.3,1)" }}
+          className="transition-all duration-[1500ms] cubic-bezier(0.16, 1, 0.3, 1)"
         />
       </svg>
-      <div style={{ position: "absolute", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <span style={{ fontSize: `${size * 0.28}px`, fontWeight: 900, lineHeight: 1, letterSpacing: "-0.02em", color: "#fff" }}>{score}</span>
-        <span style={{ fontSize: `${size * 0.12}px`, fontWeight: 600, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Fit</span>
+      <div className="absolute flex flex-col items-center">
+        <span className="font-black leading-none text-[#1B1B26] tracking-tighter" style={{ fontSize: `${size * 0.28}px` }}>{score}</span>
+        <span className="font-bold text-[#787682] uppercase tracking-widest mt-0.5" style={{ fontSize: `${size * 0.1}px` }}>Fit</span>
       </div>
     </div>
   );
 }
 
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs font-bold tracking-[0.15em] text-[#13075B] uppercase mb-6 opacity-80">
+      {children}
+    </p>
+  );
+}
+
 /* ═══════════════════════════════════════════════════════════════
-   LANDING & PROFILE & LOADING (Unchanged logic, polished styling)
+   LANDING & PROFILE & LOADING
 ══════════════════════════════════════════════════════════════════ */
 function LandingPage({ onStart, onTryExample }: { onStart: ()=>void, onTryExample: ()=>void }) {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="flex flex-col flex-1">
       <NavBar />
-      <main style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "4rem 1.5rem", textAlign: "center" }}>
-        <h1 className="animate-fade-up" style={{ fontSize: "clamp(3rem,8vw,5.5rem)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-          <span className="gradient-text">Three Futures.</span> <span style={{ color: "#f1f5f9" }}>One You.</span>
+      <main className="flex-1 flex flex-col items-center justify-center px-6 lg:px-16 text-center w-full max-w-[1600px] mx-auto min-h-[calc(100vh-80px)] py-12">
+        <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter leading-[1.05] mb-8 text-[#1B1B26]">
+          Three Futures.<br/>
+          <span className="text-[#2F05EA]">One You.</span>
         </h1>
-        <p className="animate-fade-up delay-100" style={{ maxWidth: "520px", fontSize: "1.15rem", lineHeight: 1.7, color: "#94a3b8", marginBottom: "3rem" }}>
+        <p className="animate-fade-up delay-100 max-w-3xl text-lg lg:text-2xl leading-relaxed text-[#474551] mb-12">
           Tell us where you are today. We reveal three realistic career trajectories mapping exactly how you evolve from student to professional.
         </p>
-        <div className="animate-fade-up delay-200" style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
-          <PrimaryButton onClick={onStart}>Explore My Futures →</PrimaryButton>
+        <div className="animate-fade-up delay-200 flex flex-wrap gap-6 justify-center">
+          <PrimaryButton onClick={onStart} className="text-lg px-10 py-5">Explore My Futures →</PrimaryButton>
           <button
             onClick={onTryExample}
-            style={{ padding: "0.875rem 1.75rem", borderRadius: "0.75rem", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "#94a3b8", fontWeight: 600, cursor: "pointer", transition: "all 200ms" }}
+            className="px-10 py-5 rounded-xl border border-[#787682]/30 bg-white text-[#1B1B26] font-bold hover:bg-[#EFECFC] hover:border-[#13075B]/30 transition-all text-lg shadow-sm"
           >
             Try Demo Persona
           </button>
@@ -215,24 +201,37 @@ function ProfilePage({ onSubmit, error, onClearError }: { onSubmit: (p: {year:nu
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); onClearError(); if (skills.length && interests.length) onSubmit({ year, skills, interests }); };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <NavBar right={<button type="button" onClick={loadDemo} style={{ fontSize: "0.78rem", fontWeight: 600, color: "#818cf8", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", borderRadius: "0.5rem", padding: "0.35rem 0.85rem", cursor: "pointer" }}>Load Demo ✦</button>} />
-      <main style={{ flex: 1, display: "flex", justifyContent: "center", padding: "3rem 1.5rem" }}>
-        <div style={{ width: "100%", maxWidth: "520px" }}>
-          <div className="animate-fade-up" style={{ marginBottom: "2.5rem" }}>
-            <h2 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Current Profile</h2>
+    <div className="flex flex-col flex-1">
+      <NavBar right={<button type="button" onClick={loadDemo} className="text-xs font-bold text-[#2F05EA] bg-[#EFECFC] border border-[#2F05EA]/20 rounded-lg px-4 py-2 hover:bg-[#E0DAF9] transition-all">Load Demo ✦</button>} />
+      <main className="flex-1 flex justify-center items-center p-6 lg:p-12 w-full max-w-[1600px] mx-auto min-h-[calc(100vh-80px)]">
+        <div className="w-full max-w-4xl glass p-8 lg:p-16 rounded-[2rem]">
+          <div className="animate-fade-up mb-10 text-center">
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-[#1B1B26]">Current Profile</h2>
+            <p className="text-[#474551] mt-4 text-lg">Initialize your career intelligence simulation</p>
           </div>
-          {error && <div style={{ marginBottom: "1.5rem", padding: "1rem", borderRadius: "0.75rem", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)", color: "#fca5a5" }}>⚠ {error}</div>}
-          <form onSubmit={handleSubmit} className="animate-fade-up delay-100" style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-            {/* Year selector omitted for brevity but keeping functional layout */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "0.75rem" }}>
-              {[1, 2, 3, 4].map(y => (
-                <button key={y} type="button" onClick={() => setYear(y)} style={{ padding: "0.875rem", borderRadius: "0.75rem", border: y === year ? "1px solid rgba(99,102,241,0.5)" : "1px solid rgba(255,255,255,0.07)", background: y === year ? "linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.1))" : "rgba(255,255,255,0.02)", color: y === year ? "#c4b5fd" : "#64748b", fontWeight: 700, cursor: "pointer" }}>Y{y}</button>
-              ))}
+          {error && <div className="mb-8 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700">⚠ {error}</div>}
+          
+          <form onSubmit={handleSubmit} className="animate-fade-up delay-100 flex flex-col gap-10">
+            <div>
+              <label className="block text-sm font-bold text-[#787682] uppercase tracking-widest mb-4">Year of Study</label>
+              <div className="grid grid-cols-4 gap-4 lg:gap-6">
+                {[1, 2, 3, 4].map(y => (
+                  <button key={y} type="button" onClick={() => setYear(y)} 
+                    className={`py-4 lg:py-6 rounded-2xl text-lg font-bold transition-all ${y === year ? 'border-2 border-[#13075B] bg-[#EFECFC] text-[#13075B] shadow-md' : 'border border-[#787682]/20 bg-white text-[#474551] hover:bg-[#FCF8FF]'}`}>
+                    Year {y}
+                  </button>
+                ))}
+              </div>
             </div>
-            <MiniTagInput label="Skills" tags={skills} setTags={setSkills} />
-            <MiniTagInput label="Interests" tags={interests} setTags={setInterests} />
-            <PrimaryButton type="submit" disabled={!skills.length || !interests.length}>Initialize Simulation →</PrimaryButton>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+               <MiniTagInput label="Skills" tags={skills} setTags={setSkills} placeholder="e.g. Python, React..." />
+               <MiniTagInput label="Interests" tags={interests} setTags={setInterests} placeholder="e.g. AI, Design..." />
+            </div>
+            <div className="flex justify-center mt-4">
+              <PrimaryButton type="submit" disabled={!skills.length || !interests.length} className="w-full lg:w-auto px-16 py-5 text-lg">
+                Initialize Simulation →
+              </PrimaryButton>
+            </div>
           </form>
         </div>
       </main>
@@ -240,123 +239,126 @@ function ProfilePage({ onSubmit, error, onClearError }: { onSubmit: (p: {year:nu
   );
 }
 
-function MiniTagInput({ label, tags, setTags }: { label: string, tags: string[], setTags: (t:string[])=>void }) {
+function MiniTagInput({ label, tags, setTags, placeholder }: { label: string, tags: string[], setTags: (t:string[])=>void, placeholder: string }) {
   const [val, setVal] = useState("");
   const add = () => { const t = val.trim(); if (t && !tags.includes(t)) setTags([...tags, t]); setVal(""); };
   return (
     <div>
-      <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "#64748b", textTransform: "uppercase", marginBottom: "0.5rem" }}>{label}</label>
+      <label className="block text-sm font-bold text-[#787682] uppercase tracking-widest mb-4">{label}</label>
       {tags.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "0.5rem" }}>
-          {tags.map((t: string, i: number) => (
-             <span key={i} style={{ fontSize: "0.8rem", padding: "0.2rem 0.6rem", borderRadius: "999px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", gap: "0.4rem", alignItems: "center" }}>{t} <button type="button" onClick={() => setTags(tags.filter((_,idx)=>idx!==i))} style={{background:"none",border:"none",color:"#94a3b8",cursor:"pointer",padding:0}}>×</button></span>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((t, i) => (
+             <span key={i} className="text-sm px-3 py-1.5 rounded-full bg-[#EFECFC] border border-[#29236F]/10 flex gap-2 items-center text-[#13075B] font-medium">
+               {t} <button type="button" onClick={() => setTags(tags.filter((_,idx)=>idx!==i))} className="text-[#13075B]/60 hover:text-[#13075B]">×</button>
+             </span>
           ))}
         </div>
       )}
-      <input value={val} onChange={(e) => setVal(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === ",") { e.preventDefault(); add(); } }} placeholder={`Add ${label.toLowerCase()}...`} style={{ width: "100%", padding: "0.75rem 1rem", borderRadius: "0.65rem", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", color: "#fff", outline: "none" }} />
+      <input value={val} onChange={(e) => setVal(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === ",") { e.preventDefault(); add(); } }} 
+        placeholder={placeholder} 
+        className="w-full px-5 py-4 rounded-xl border border-[#787682]/30 bg-white text-[#1B1B26] outline-none focus:border-[#2F05EA] focus:ring-4 focus:ring-[#2F05EA]/10 transition-all text-lg shadow-sm" />
     </div>
   );
 }
 
 function LoadingPage() {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: "80px", height: "80px", position: "relative" }}>
-         <div className="spin" style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px solid transparent", borderTopColor: "#6366f1" }} />
-         <div className="glow-pulse" style={{ position: "absolute", inset: "20px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.6), transparent)" }} />
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="relative w-32 h-32">
+         <div className="spin absolute inset-0 rounded-full border-4 border-transparent border-t-[#2F05EA]" />
+         <div className="spin-rev absolute inset-4 rounded-full border-4 border-transparent border-t-[#001F1A] opacity-50" />
+         <div className="glow-pulse absolute inset-10 rounded-full bg-[#2F05EA]/10 blur-xl" />
       </div>
-      <p className="animate-fade-up delay-200" style={{ marginTop: "2rem", color: "#94a3b8", letterSpacing: "0.1em", textTransform: "uppercase", fontSize: "0.75rem", fontWeight: 600 }}>Analyzing trajectory...</p>
+      <p className="animate-fade-up delay-200 mt-10 text-[#13075B] tracking-[0.2em] uppercase font-bold text-sm">
+        Computing Trajectories...
+      </p>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RESULTS: VISUAL TRAJECTORY GRAPH
+   RESULTS: EXPANSIVE DESKTOP VISUALIZATION
 ══════════════════════════════════════════════════════════════════ */
 const ACCENTS = [
-  { from: "#6366f1", to: "#a855f7", glow: "rgba(99,102,241,0.5)" }, // Indigo -> Purple
-  { from: "#06b6d4", to: "#3b82f6", glow: "rgba(6,182,212,0.5)" }, // Cyan -> Blue
-  { from: "#f59e0b", to: "#ef4444", glow: "rgba(245,158,11,0.5)" } // Amber -> Red
+  { from: "#13075B", to: "#2F05EA", bg: "#EFECFC" }, 
+  { from: "#2F05EA", to: "#4B3BFF", bg: "#EAE8FD" },
+  { from: "#001F1A", to: "#13075B", bg: "#E6EFEE" }
 ];
 
 function ResultsPage({ result, source, onSelectPath, onRerun }: { result: SimulationResult, source: string, onSelectPath: (p: CareerPath)=>void, onRerun: ()=>void }) {
   const sorted = [...result.paths].sort((a, b) => b.fitScore - a.fitScore);
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", overflowX: "hidden" }}>
-      <NavBar right={<button onClick={onRerun} style={{ fontSize: "0.75rem", color: "#94a3b8", background: "none", border: "1px solid rgba(255,255,255,0.1)", padding: "0.3rem 0.7rem", borderRadius: "0.5rem", cursor: "pointer" }}>← Back</button>} />
+    <div className="flex flex-col flex-1 overflow-x-hidden">
+      <NavBar right={<button onClick={onRerun} className="text-sm font-bold text-[#474551] bg-white border border-[#787682]/20 px-4 py-2 rounded-lg hover:bg-[#EFECFC] transition-colors shadow-sm">← Refine Profile</button>} />
 
-      <main style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%", padding: "2rem 1.5rem 6rem", maxWidth: "1200px", margin: "0 auto" }}>
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-6 lg:px-16 py-12 lg:py-20 flex flex-col">
         {/* Header */}
-        <div className="animate-fade-up" style={{ textAlign: "center", marginBottom: "1rem", position: "relative", zIndex: 10 }}>
-          <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.15em", color: "#6366f1", textTransform: "uppercase", marginBottom: "0.5rem" }}>Career Intelligence Visualization</p>
-          <h2 style={{ fontSize: "clamp(2rem,4vw,2.5rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "#fff" }}>Trajectories Found</h2>
+        <div className="animate-fade-up mb-8 z-10 text-center lg:text-left">
+          <p className="text-xs font-bold tracking-[0.15em] text-[#13075B] uppercase mb-3 opacity-80">Career Intelligence Visualization</p>
+          <h2 className="text-4xl lg:text-6xl font-black tracking-tight text-[#1B1B26]">Three Discovered Trajectories</h2>
         </div>
 
-        {/* --- TRAJECTORY GRAPH --- */}
-        <div style={{ position: "relative", width: "100%", minHeight: "450px", marginTop: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        {/* --- EXPANSIVE TRAJECTORY GRAPH --- */}
+        <div className="relative w-full flex flex-col lg:flex-row items-center justify-between min-h-[600px] lg:min-h-[700px] mt-4 lg:mt-12 gap-16 lg:gap-0">
           
           {/* SVG Background Lines */}
-          <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "visible" }}>
-            <svg width="100%" height="100%" preserveAspectRatio="none" style={{ overflow: "visible" }}>
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            {/* Desktop SVG */}
+            <svg className="hidden lg:block w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 1000">
               <defs>
-                <linearGradient id="grad0" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor={ACCENTS[0].from} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={ACCENTS[0].from} stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="grad1" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor={ACCENTS[1].from} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={ACCENTS[1].from} stopOpacity="0.8" />
-                </linearGradient>
-                <linearGradient id="grad2" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor={ACCENTS[2].from} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={ACCENTS[2].from} stopOpacity="0.8" />
-                </linearGradient>
+                <linearGradient id="g0" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor={ACCENTS[0].from} stopOpacity="0.1" /><stop offset="100%" stopColor={ACCENTS[0].from} stopOpacity="0.8" /></linearGradient>
+                <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor={ACCENTS[1].from} stopOpacity="0.1" /><stop offset="100%" stopColor={ACCENTS[1].from} stopOpacity="0.8" /></linearGradient>
+                <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor={ACCENTS[2].from} stopOpacity="0.1" /><stop offset="100%" stopColor={ACCENTS[2].from} stopOpacity="0.8" /></linearGradient>
               </defs>
-              
-              {/* Path 1 (Left) */}
-              <path d="M 50% 100% C 50% 60%, 16.6% 60%, 16.6% 0%" fill="none" stroke="url(#grad0)" strokeWidth="2" className="svg-trajectory-line delay-300" />
-              {/* Path 2 (Center) */}
-              <path d="M 50% 100% L 50% 0%" fill="none" stroke="url(#grad1)" strokeWidth="2" className="svg-trajectory-line delay-400" />
-              {/* Path 3 (Right) */}
-              <path d="M 50% 100% C 50% 60%, 83.3% 60%, 83.3% 0%" fill="none" stroke="url(#grad2)" strokeWidth="2" className="svg-trajectory-line delay-500" />
+              <path d="M 150 500 C 450 500, 550 166, 850 166" fill="none" stroke="url(#g0)" strokeWidth="3" className="svg-trajectory-line delay-300" />
+              <path d="M 150 500 L 850 500" fill="none" stroke="url(#g1)" strokeWidth="3" className="svg-trajectory-line delay-400" />
+              <path d="M 150 500 C 450 500, 550 833, 850 833" fill="none" stroke="url(#g2)" strokeWidth="3" className="svg-trajectory-line delay-500" />
+            </svg>
+            
+            {/* Mobile SVG */}
+            <svg className="block lg:hidden w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 1000">
+              <defs>
+                <linearGradient id="gm" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#13075B" stopOpacity="0.5" /><stop offset="100%" stopColor="#13075B" stopOpacity="0.05" /></linearGradient>
+              </defs>
+              <path d="M 500 50 L 500 950" fill="none" stroke="url(#gm)" strokeWidth="3" className="svg-trajectory-line delay-300" />
             </svg>
           </div>
 
-          {/* Top Row: 3 Career Nodes */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem", zIndex: 10, position: "relative" }}>
+          {/* Left Node: Current Profile */}
+          <div className="lg:w-[25%] flex justify-center z-10 w-full animate-fade-up delay-200">
+            <div className="bg-white p-8 rounded-full flex flex-col items-center justify-center border-4 border-[#EFECFC] shadow-[0_8px_32px_rgba(19,7,91,0.08)] aspect-square w-56 lg:w-64">
+              <div className="glow-pulse w-5 h-5 bg-[#2F05EA] rounded-full mb-4 shadow-[0_0_12px_rgba(47,5,234,0.4)]" />
+              <span className="text-sm font-black tracking-[0.2em] text-[#13075B] uppercase text-center leading-relaxed">Current<br/>Profile</span>
+            </div>
+          </div>
+
+          {/* Right Nodes: 3 Career Cards */}
+          <div className="lg:w-[35%] flex flex-col justify-between z-10 w-full h-full gap-8 lg:gap-12 py-4 lg:py-0">
             {sorted.map((path, idx) => (
               <VisualCareerCard key={path.title} path={path} accent={ACCENTS[idx]} delay={600 + idx * 200} onClick={() => onSelectPath(path)} />
             ))}
           </div>
-
-          {/* Bottom Row: Current Profile Node */}
-          <div className="animate-fade-up delay-200" style={{ display: "flex", justifyContent: "center", marginTop: "3rem", zIndex: 10, position: "relative" }}>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div className="glow-pulse" style={{ width: "24px", height: "24px", borderRadius: "50%", background: "#e2e8f0", boxShadow: "0 0 20px rgba(255,255,255,0.6)", marginBottom: "0.75rem", border: "4px solid #090c14" }} />
-              <div style={{ padding: "0.4rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "999px", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.05em", color: "#e2e8f0" }}>CURRENT PROFILE</div>
-            </div>
-          </div>
         </div>
 
         {/* --- COMPARISON BARS --- */}
-        <div className="animate-fade-up delay-1200 glass" style={{ marginTop: "5rem", padding: "2rem", borderRadius: "1.25rem", width: "100%", maxWidth: "800px", margin: "5rem auto 0" }}>
-          <h3 style={{ fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.1em", color: "#94a3b8", textTransform: "uppercase", marginBottom: "2rem" }}>Trajectory Comparison</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        <div className="animate-fade-up delay-1200 mt-24 glass p-8 lg:p-12 rounded-3xl w-full max-w-5xl mx-auto">
+          <SectionLabel>Trajectory Comparison</SectionLabel>
+          <div className="flex flex-col gap-8 mt-6">
             {sorted.map((path, idx) => (
-              <div key={path.title} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#e2e8f0", width: "120px", flexShrink: 0, textAlign: "right" }}>{path.title}</span>
-                <div style={{ flex: 1, height: "6px", background: "rgba(255,255,255,0.05)", borderRadius: "3px", overflow: "hidden", position: "relative" }}>
+              <div key={path.title} className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
+                <span className="text-lg font-bold text-[#1B1B26] lg:w-64 flex-shrink-0 lg:text-right">{path.title}</span>
+                <div className="flex-1 h-4 bg-[#EFECFC] rounded-full overflow-hidden relative shadow-inner">
                   <div
-                    className="bar-animate"
+                    className="bar-animate absolute inset-y-0 left-0 rounded-full"
                     style={{
-                      height: "100%", width: `${path.fitScore}%`, borderRadius: "3px",
+                      width: `${path.fitScore}%`,
                       background: `linear-gradient(90deg, ${ACCENTS[idx].from}, ${ACCENTS[idx].to})`,
-                      boxShadow: `0 0 10px ${ACCENTS[idx].glow}`, animationDelay: `${1200 + idx*150}ms`
+                      animationDelay: `${1200 + idx*150}ms`
                     }}
                   />
                 </div>
-                <span style={{ fontSize: "0.85rem", fontWeight: 800, color: ACCENTS[idx].from, width: "40px" }}>{path.fitScore}%</span>
+                <span className="text-2xl font-black lg:w-20" style={{ color: ACCENTS[idx].from }}>{path.fitScore}%</span>
               </div>
             ))}
           </div>
@@ -366,89 +368,116 @@ function ResultsPage({ result, source, onSelectPath, onRerun }: { result: Simula
   );
 }
 
-function VisualCareerCard({ path, accent, delay, onClick }: { path: CareerPath, accent: {from:string,to:string,glow:string}, delay: number, onClick: ()=>void }) {
+function VisualCareerCard({ path, accent, delay, onClick }: { path: CareerPath, accent: {from:string,to:string,bg:string}, delay: number, onClick: ()=>void }) {
   return (
     <div
-      className="animate-fade-up card-hover glass"
-      style={{ animationDelay: `${delay}ms`, cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", padding: "2rem 1.5rem", borderRadius: "1.25rem", position: "relative" }}
+      className="animate-fade-up card-hover glass w-full rounded-[2rem] p-6 lg:p-8 flex items-center gap-6 lg:gap-8 cursor-pointer relative overflow-hidden group"
+      style={{ animationDelay: `${delay}ms` }}
       onClick={onClick}
     >
-      <div style={{ position: "absolute", top: "-1px", left: "20%", right: "20%", height: "2px", background: `linear-gradient(90deg, transparent, ${accent.from}, transparent)`, opacity: 0.8 }} />
+      <div className="absolute top-0 left-0 w-2 h-full transition-all duration-300 opacity-20 group-hover:opacity-100 group-hover:w-3" style={{ background: accent.from }} />
       
-      <RadialGauge score={path.fitScore} color={accent.from} delay={delay + 200} size={110} stroke={6} />
+      <RadialGauge score={path.fitScore} color={accent.from} delay={delay + 200} size={100} stroke={8} />
       
-      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", marginTop: "1.5rem", textAlign: "center", lineHeight: 1.2 }}>{path.title}</h3>
-      
-      {/* Skill Gaps Mini-Viz */}
-      <div style={{ width: "100%", marginTop: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        {path.skillGaps.slice(0,2).map((sg: SkillGap) => (
-          <div key={sg.skill} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
-            <span style={{ fontSize: "0.65rem", color: "#94a3b8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "80px" }}>{sg.skill}</span>
-            <div style={{ display: "flex", gap: "2px" }}>
-              {[1,2,3,4,5].map(lvl => (
-                <div key={lvl} style={{ width: "10px", height: "4px", borderRadius: "1px", background: lvl <= sg.currentLevel ? accent.from : lvl <= sg.targetLevel ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.03)" }} />
-              ))}
+      <div className="flex-1 min-w-0">
+        <h3 className="text-xl lg:text-2xl font-black text-[#1B1B26] mb-3 truncate">{path.title}</h3>
+        {/* Minimal skill gap viz */}
+        <div className="flex flex-col gap-2">
+          {path.skillGaps.slice(0,2).map((sg: SkillGap) => (
+            <div key={sg.skill} className="flex items-center justify-between gap-4">
+              <span className="text-xs font-bold text-[#787682] truncate">{sg.skill}</span>
+              <div className="flex gap-1 flex-shrink-0">
+                {[1,2,3,4,5].map(lvl => (
+                  <div key={lvl} className="w-3 h-1.5 rounded-sm" 
+                    style={{ background: lvl <= sg.currentLevel ? accent.from : lvl <= sg.targetLevel ? accent.bg : "#F3F1F8" }} />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       
-      <div style={{ marginTop: "1.5rem", fontSize: "0.75rem", fontWeight: 700, color: accent.from, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-        Explore Path →
+      <div className="hidden sm:flex w-10 h-10 rounded-full items-center justify-center bg-[#EFECFC] text-[#2F05EA] group-hover:bg-[#2F05EA] group-hover:text-white transition-colors">
+        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DETAIL PAGE: VISUAL EXPLORATION
+   DETAIL PAGE: FULL SCREEN DASHBOARD GRID
 ══════════════════════════════════════════════════════════════════ */
-type DetailTab = "overview" | "roadmap" | "projects" | "first30";
-
 function DetailPage({ path, onBack, onWhatIf }: { path: CareerPath, onBack: ()=>void, onWhatIf: (skill:string)=>void }) {
-  const [tab, setTab] = useState<DetailTab>("overview");
   const [whatIfVal, setWhatIfVal] = useState("");
+  const submitWhatIf = (e: React.FormEvent) => { e.preventDefault(); if(whatIfVal.trim()) onWhatIf(whatIfVal.trim()); }
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <NavBar right={<button onClick={onBack} style={{ fontSize: "0.75rem", color: "#94a3b8", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", padding: "0.4rem 0.8rem", borderRadius: "0.5rem", cursor: "pointer" }}>← Overview</button>} />
+    <div className="flex flex-col flex-1 overflow-x-hidden">
+      <NavBar right={<button onClick={onBack} className="text-sm font-bold text-[#474551] bg-white border border-[#787682]/20 px-4 py-2 rounded-lg hover:bg-[#EFECFC] transition-colors shadow-sm">← Trajectories</button>} />
 
-      <main style={{ flex: 1, maxWidth: "900px", margin: "0 auto", width: "100%", padding: "3rem 1.5rem 6rem" }}>
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-6 lg:px-16 py-12 lg:py-16">
         
-        {/* Header Visualization */}
-        <div className="animate-fade-up" style={{ display: "flex", alignItems: "center", gap: "2rem", marginBottom: "3rem" }}>
-          <RadialGauge score={path.fitScore} size={120} color="#6366f1" />
-          <div>
-            <h2 style={{ fontSize: "clamp(1.75rem,4vw,2.5rem)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "0.5rem", color: "#fff" }}>{path.title}</h2>
-            <p style={{ fontSize: "0.9rem", color: "#94a3b8", lineHeight: 1.6, maxWidth: "600px" }}>{path.summary}</p>
+        {/* Hero Section */}
+        <div className="animate-fade-up flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 mb-12">
+          <RadialGauge score={path.fitScore} size={160} stroke={12} color="#13075B" />
+          <div className="flex-1">
+            <p className="text-xs font-bold tracking-[0.2em] text-[#2F05EA] uppercase mb-4">Trajectory Analysis</p>
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tight text-[#1B1B26] mb-6 leading-tight">{path.title}</h2>
+            <p className="text-lg lg:text-xl text-[#474551] max-w-4xl leading-relaxed">{path.summary}</p>
           </div>
         </div>
 
-        {/* Tabs as sleek segmented controls */}
-        <div className="animate-fade-up delay-100" style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.1)", marginBottom: "2.5rem" }}>
-          {[
-            { id: "overview", label: "Skill Map" },
-            { id: "roadmap", label: "Trajectory" },
-            { id: "projects", label: "Projects" },
-            { id: "first30", label: "First 30 Days" }
-          ].map(t => (
-            <button
-              key={t.id} onClick={() => setTab(t.id as DetailTab)}
-              style={{ padding: "0.8rem 1.5rem", fontSize: "0.8rem", fontWeight: 700, color: tab === t.id ? "#fff" : "#64748b", background: "none", border: "none", borderBottom: `2px solid ${tab === t.id ? "#6366f1" : "transparent"}`, cursor: "pointer", transition: "all 200ms" }}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        {/* Dashboard Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+          
+          {/* Skills Map */}
+          <div className="lg:col-span-7 glass p-8 lg:p-12 rounded-[2rem] animate-fade-up delay-100">
+            <SectionLabel>Skill Visualization</SectionLabel>
+            <SkillMap path={path} />
+          </div>
 
-        {/* Visual Content */}
-        <div className="animate-fade-up delay-200">
-          {tab === "overview" && <SkillMap path={path} />}
-          {tab === "roadmap" && <VisualTrajectory path={path} />}
-          {tab === "projects" && <VisualProjects path={path} />}
-          {tab === "first30" && <Timeline30Days path={path} />}
-        </div>
+          {/* Fit Reasoning & What If */}
+          <div className="lg:col-span-5 flex flex-col gap-8 lg:gap-10 animate-fade-up delay-200">
+             <div className="glass p-8 lg:p-12 rounded-[2rem] flex-1">
+                <SectionLabel>Fit Analysis</SectionLabel>
+                <p className="text-[#474551] leading-relaxed text-lg mb-8">{path.fitReason}</p>
+                <div className="p-6 rounded-2xl bg-[#EFECFC] border border-[#29236F]/10">
+                   <span className="text-xs font-bold text-[#13075B] uppercase tracking-widest block mb-3 opacity-80">Why it fits you</span>
+                   <p className="text-[#29236F] leading-relaxed text-sm lg:text-base font-medium">{path.whyItFits}</p>
+                </div>
+             </div>
+             
+             {/* What If Interactive Widget */}
+             <div className="glass p-8 lg:p-10 rounded-[2rem] bg-white border border-[#2F05EA]/20 shadow-[0_8px_30px_rgba(47,5,234,0.06)] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#EFECFC] rounded-bl-full opacity-50 pointer-events-none" />
+                <h3 className="text-xl font-bold text-[#1B1B26] mb-2 relative z-10">What if I learn...?</h3>
+                <p className="text-sm text-[#787682] mb-6 relative z-10">Add a skill to instantly recalculate your trajectories.</p>
+                <form onSubmit={submitWhatIf} className="flex gap-4 relative z-10">
+                  <input value={whatIfVal} onChange={e=>setWhatIfVal(e.target.value)} placeholder="e.g. Docker" className="flex-1 px-5 py-4 rounded-xl bg-white border border-[#787682]/30 text-[#1B1B26] outline-none focus:border-[#2F05EA] focus:ring-4 focus:ring-[#2F05EA]/10 transition-all shadow-sm" />
+                  <PrimaryButton type="submit" disabled={!whatIfVal.trim()} className="px-6 py-4 rounded-xl shadow-md">Regenerate</PrimaryButton>
+                </form>
+             </div>
+          </div>
 
+          {/* Year Trajectory (Horizontal on Desktop) */}
+          <div className="lg:col-span-12 glass p-8 lg:p-12 rounded-[2rem] animate-fade-up delay-300 overflow-hidden">
+            <SectionLabel>Year-by-Year Roadmap</SectionLabel>
+            <VisualTrajectory path={path} />
+          </div>
+
+          {/* First 30 Days */}
+          <div className="lg:col-span-12 glass p-8 lg:p-12 rounded-[2rem] animate-fade-up delay-400 overflow-hidden bg-gradient-to-b from-white to-[#FCF8FF]">
+            <SectionLabel>First 30 Days Action Plan</SectionLabel>
+            <Timeline30Days path={path} />
+          </div>
+
+          {/* Projects */}
+          <div className="lg:col-span-12 glass p-8 lg:p-12 rounded-[2rem] animate-fade-up delay-500">
+            <SectionLabel>Recommended Projects</SectionLabel>
+            <VisualProjects path={path} />
+          </div>
+
+        </div>
       </main>
     </div>
   );
@@ -457,86 +486,95 @@ function DetailPage({ path, onBack, onWhatIf }: { path: CareerPath, onBack: ()=>
 /* ── 1. Skill Map (Visual Blocks) ───────────────────────────── */
 function SkillMap({ path }: { path: CareerPath }) {
   return (
-    <div style={{ display: "grid", gap: "1.5rem" }}>
+    <div className="flex flex-col gap-6 lg:gap-8">
       {path.skillGaps.map((sg, i) => (
-        <div key={sg.skill} className="glass animate-fade-up" style={{ padding: "1.5rem", borderRadius: "1rem", animationDelay: `${i*100}ms`, display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <div style={{ flex: 1 }}>
-            <h4 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e2e8f0", marginBottom: "0.25rem" }}>{sg.skill}</h4>
-            <span style={{ fontSize: "0.7rem", color: sg.importance === "high" ? "#ef4444" : sg.importance === "medium" ? "#f59e0b" : "#64748b", textTransform: "uppercase", fontWeight: 700 }}>{sg.importance} Priority</span>
+        <div key={sg.skill} className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8 p-6 rounded-2xl bg-[#FCF8FF] border border-[#787682]/10">
+          <div className="flex-1 min-w-0">
+            <h4 className="text-lg font-bold text-[#1B1B26] mb-2 truncate">{sg.skill}</h4>
+            <span className={`text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full ${sg.importance === "high" ? 'bg-red-50 text-red-600 border border-red-100' : sg.importance === "medium" ? 'bg-amber-50 text-amber-700 border border-amber-100' : 'bg-slate-100 text-slate-600 border border-slate-200'}`}>
+              {sg.importance} Priority
+            </span>
           </div>
           
-          <div style={{ display: "flex", gap: "0.5rem" }}>
-            {[1,2,3,4,5].map(lvl => (
-              <div
-                key={lvl}
-                style={{
-                  width: "32px", height: "12px", borderRadius: "2px",
-                  background: lvl <= sg.currentLevel ? "#6366f1" : lvl <= sg.targetLevel ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.05)",
-                  border: lvl > sg.currentLevel && lvl <= sg.targetLevel ? "1px dashed rgba(99,102,241,0.5)" : "none",
-                  boxShadow: lvl <= sg.currentLevel ? "0 0 12px rgba(99,102,241,0.4)" : "none"
-                }}
-              />
-            ))}
+          <div className="flex items-center gap-6">
+            <div className="flex gap-2">
+              {[1,2,3,4,5].map(lvl => (
+                <div
+                  key={lvl}
+                  className={`w-8 lg:w-12 h-3 rounded-sm transition-all duration-500 ${
+                    lvl <= sg.currentLevel ? "bg-[#13075B] shadow-sm" 
+                    : lvl <= sg.targetLevel ? "bg-[#EFECFC] border border-[#2F05EA]/30 border-dashed" 
+                    : "bg-[#F3F1F8]"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="w-12 text-right text-xl font-black text-[#13075B]">{sg.targetLevel}/5</div>
           </div>
-          <div style={{ width: "40px", textAlign: "right", fontSize: "0.85rem", fontWeight: 800, color: "#fff" }}>{sg.targetLevel}/5</div>
         </div>
       ))}
-      <div className="glass" style={{ padding: "1.5rem", borderRadius: "1rem", marginTop: "1rem" }}>
-        <p style={{ fontSize: "0.75rem", color: "#94a3b8", lineHeight: 1.6 }}><span style={{ color: "#818cf8", fontWeight: 700 }}>Why it fits:</span> {path.whyItFits}</p>
+    </div>
+  );
+}
+
+/* ── 2. Visual Trajectory (Horizontal on Desktop) ────────────── */
+function VisualTrajectory({ path }: { path: CareerPath }) {
+  return (
+    <div className="relative pt-4 w-full">
+      {/* Track Lines */}
+      <div className="hidden lg:block absolute top-[28px] left-8 right-8 h-1 bg-[#EFECFC] rounded-full overflow-hidden">
+         <div className="w-full h-full bg-gradient-to-r from-[#2F05EA] to-transparent opacity-20" />
+      </div>
+      <div className="block lg:hidden absolute top-8 bottom-0 left-[28px] w-1 bg-[#EFECFC] rounded-full overflow-hidden">
+         <div className="w-full h-full bg-gradient-to-b from-[#2F05EA] to-transparent opacity-20" />
+      </div>
+      
+      <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-8 relative z-10">
+        {path.milestones.map((m, i) => (
+          <div key={i} className="flex-1 relative pl-16 lg:pl-0 lg:pt-16 group">
+            {/* Node */}
+            <div className="absolute left-[20px] top-[4px] lg:left-8 lg:top-[20px] w-5 h-5 rounded-full bg-[#2F05EA] shadow-[0_0_12px_rgba(47,5,234,0.4)] border-4 border-white transition-transform group-hover:scale-125" />
+            
+            <h4 className="text-xl font-black text-[#13075B] uppercase tracking-widest mb-6 lg:px-6">{m.yearLabel}</h4>
+            
+            <div className="bg-[#FCF8FF] border border-[#787682]/10 p-6 lg:p-8 rounded-2xl h-full transition-colors group-hover:bg-[#EFECFC] group-hover:border-[#2F05EA]/20 shadow-sm">
+              <div className="flex flex-wrap gap-2 mb-6">
+                {m.skillsToLearn.map(s => (
+                  <span key={s} className="text-xs font-bold px-3 py-1.5 bg-white text-[#2F05EA] rounded-lg border border-[#2F05EA]/10 shadow-sm">{s}</span>
+                ))}
+              </div>
+              <ul className="flex flex-col gap-4">
+                {m.goals.map((g, j) => (
+                  <li key={j} className="text-sm lg:text-base text-[#474551] flex items-start gap-3">
+                    <span className="text-[#2F05EA] mt-1 text-lg leading-none">•</span> <span className="leading-relaxed">{g}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-/* ── 2. Visual Trajectory (Roadmap) ─────────────────────────── */
-function VisualTrajectory({ path }: { path: CareerPath }) {
-  return (
-    <div style={{ position: "relative", paddingLeft: "1.5rem" }}>
-      {/* Vertical Track */}
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: "1.5rem", width: "2px", background: "linear-gradient(to bottom, #6366f1, rgba(99,102,241,0.1))" }} />
-      
-      {path.milestones.map((m, i) => (
-        <div key={i} className="animate-fade-up" style={{ position: "relative", paddingLeft: "2.5rem", paddingBottom: "3rem", animationDelay: `${i*150}ms` }}>
-          {/* Node */}
-          <div className="glow-pulse" style={{ position: "absolute", left: "-6px", top: "4px", width: "14px", height: "14px", borderRadius: "50%", background: "#818cf8", boxShadow: "0 0 15px #6366f1", border: "3px solid #090c14" }} />
-          
-          <h4 style={{ fontSize: "0.85rem", fontWeight: 800, color: "#fff", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "1rem" }}>{m.yearLabel}</h4>
-          
-          <div className="glass" style={{ padding: "1.25rem", borderRadius: "1rem" }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1rem" }}>
-              {m.skillsToLearn.map(s => (
-                <span key={s} style={{ fontSize: "0.7rem", padding: "0.25rem 0.6rem", background: "rgba(99,102,241,0.15)", color: "#a5b4fc", borderRadius: "999px", border: "1px solid rgba(99,102,241,0.3)" }}>{s}</span>
-              ))}
-            </div>
-            <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              {m.goals.map((g, j) => (
-                <li key={j} style={{ fontSize: "0.85rem", color: "#94a3b8", display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-                  <span style={{ color: "#6366f1" }}>■</span> {g}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* ── 3. Projects (Tech Cards) ───────────────────────────────── */
+/* ── 3. Projects (Tech Cards Grid) ──────────────────────────── */
 function VisualProjects({ path }: { path: CareerPath }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1.5rem" }}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-6">
       {path.projects.map((proj, i) => (
-        <div key={i} className="glass animate-fade-up card-hover" style={{ padding: "1.5rem", borderRadius: "1rem", display: "flex", flexDirection: "column", animationDelay: `${i*100}ms` }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.8rem", color: "#94a3b8" }}>0{i+1}</div>
-            <span style={{ fontSize: "0.7rem", fontWeight: 700, color: proj.difficulty==="beginner" ? "#34d399" : proj.difficulty==="advanced" ? "#f87171" : "#fbbf24", textTransform: "uppercase", letterSpacing: "0.05em" }}>{proj.weeks}w • {proj.difficulty}</span>
+        <div key={i} className="bg-white border border-[#787682]/15 p-8 rounded-2xl flex flex-col hover:-translate-y-1 hover:border-[#2F05EA]/30 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#13075B]/5">
+          <div className="flex justify-between items-center mb-6">
+            <div className="w-10 h-10 rounded-xl bg-[#EFECFC] flex items-center justify-center text-sm font-bold text-[#13075B]">0{i+1}</div>
+            <span className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full ${proj.difficulty==="beginner" ? "bg-emerald-50 text-emerald-700" : proj.difficulty==="advanced" ? "bg-red-50 text-red-700" : "bg-amber-50 text-amber-700"}`}>
+              {proj.weeks}w • {proj.difficulty}
+            </span>
           </div>
-          <h4 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", marginBottom: "0.5rem" }}>{proj.name}</h4>
-          <p style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.6, flex: 1 }}>{proj.description}</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "1.25rem" }}>
+          <h4 className="text-xl font-black text-[#1B1B26] mb-4 leading-tight">{proj.name}</h4>
+          <p className="text-sm lg:text-base text-[#474551] leading-relaxed flex-1">{proj.description}</p>
+          <div className="flex flex-wrap gap-2 mt-8">
             {proj.skillsPracticed.map(s => (
-              <span key={s} style={{ fontSize: "0.65rem", padding: "0.2rem 0.5rem", background: "rgba(255,255,255,0.05)", color: "#cbd5e1", borderRadius: "4px" }}>{s}</span>
+              <span key={s} className="text-xs font-medium px-3 py-1.5 bg-[#FCF8FF] text-[#474551] rounded-md border border-[#787682]/10">{s}</span>
             ))}
           </div>
         </div>
@@ -545,27 +583,27 @@ function VisualProjects({ path }: { path: CareerPath }) {
   );
 }
 
-/* ── 4. First 30 Days (Horizontal Timeline) ─────────────────── */
+/* ── 4. First 30 Days (Horizontal Node Timeline) ────────────── */
 function Timeline30Days({ path }: { path: CareerPath }) {
   const sorted = [...path.first30Days].sort((a,b) => a.week - b.week);
   
   return (
-    <div style={{ width: "100%", overflowX: "auto", paddingBottom: "1rem" }}>
-      <div style={{ display: "flex", minWidth: "max-content", paddingTop: "2rem" }}>
+    <div className="w-full overflow-x-auto pb-4 pt-2">
+      <div className="flex min-w-max">
         {sorted.map((w, i) => (
-          <div key={w.week} className="animate-fade-up" style={{ width: "260px", position: "relative", animationDelay: `${i*100}ms` }}>
-            {/* Connecting Top Line */}
-            <div style={{ position: "absolute", top: 0, left: 0, right: i === sorted.length-1 ? "50%" : 0, height: "2px", background: "rgba(99,102,241,0.3)" }} />
+          <div key={w.week} className="w-[320px] lg:w-[400px] relative group">
+            {/* Connecting Track */}
+            <div className="absolute top-[10px] left-[24px] right-0 h-1 bg-[#EFECFC] group-hover:bg-[#2F05EA]/20 transition-colors" style={{ display: i === sorted.length-1 ? 'none' : 'block' }} />
             
             {/* Glowing Node */}
-            <div className="glow-pulse" style={{ position: "absolute", top: "-5px", left: "20px", width: "12px", height: "12px", borderRadius: "50%", background: "#818cf8", boxShadow: "0 0 10px #818cf8" }} />
+            <div className="absolute top-[2px] left-[20px] w-5 h-5 rounded-full bg-white border-4 border-[#EFECFC] group-hover:border-[#2F05EA] transition-all shadow-sm" />
             
-            <div style={{ padding: "1.5rem 1.5rem 0 20px" }}>
-              <h4 style={{ fontSize: "0.9rem", fontWeight: 800, color: "#fff", marginBottom: "1rem" }}>Week {w.week}</h4>
-              <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <div className="pt-10 pr-10 pl-[20px]">
+              <h4 className="text-lg font-black text-[#13075B] mb-6 tracking-tight">Week {w.week}</h4>
+              <ul className="flex flex-col gap-4">
                 {w.tasks.map((task, j) => (
-                  <li key={j} style={{ fontSize: "0.8rem", color: "#94a3b8", lineHeight: 1.5, display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-                    <div style={{ marginTop: "0.25rem", width: "4px", height: "4px", borderRadius: "50%", background: "rgba(255,255,255,0.3)", flexShrink: 0 }} />
+                  <li key={j} className="text-sm lg:text-base text-[#474551] leading-relaxed flex items-start gap-3">
+                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-[#13075B]/20 flex-shrink-0 group-hover:bg-[#2F05EA] transition-colors" />
                     {task}
                   </li>
                 ))}
