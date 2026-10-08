@@ -10,7 +10,7 @@ export const FALLBACK_SIMULATION_RESULT: SimulationResult = {
     {
       title: "Software Engineer (Foundations & Systems)",
       summary: "Focus on procedural programming, algorithms, and core system architectures to build scalable desktop and backend software applications.",
-      whyItFits: "Directly leverages your existing procedural programming background and foundational coding mindset to transition into high-performance software engineering.",
+      whyItFits: "Directly leverages your foundational coding mindset in Python and procedural background in C++ to transition into high-performance systems and software engineering.",
       fitScore: 72,
       fitReason: "Strong algorithmic potential and programming problem solving, though requires deep exposure to object-oriented patterns, version control, and data structures.",
       skillGaps: [
@@ -258,7 +258,7 @@ export const FALLBACK_SIMULATION_RESULT: SimulationResult = {
     {
       title: "Data & Analytics Engineer",
       summary: "Transform raw organizational datasets into structured, reliable pipelines that power reporting dashboards and analytics.",
-      whyItFits: "Applies algorithmic discipline to data modeling, transformation scripting, and automated data quality validation.",
+      whyItFits: "Applies algorithmic discipline from C++ and Python data scripting to build high-volume data pipelines that power modern Web applications and AI systems.",
       fitScore: 54,
       fitReason: "Solid logical reasoning and programming basics, but requires learning relational schema design, SQL querying, and automated data pipelines.",
       skillGaps: [
