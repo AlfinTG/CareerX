@@ -1,0 +1,1 @@
+const fs = require('fs'); let css = fs.readFileSync('app/globals.css', 'utf8'); css = css.replace(/@source.*?\n/g, ''); css = css.replace('@import "tailwindcss";', '@import "tailwindcss";\n@config "../tailwind.config.ts";'); fs.writeFileSync('app/globals.css', css);
