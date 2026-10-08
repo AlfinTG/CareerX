@@ -1,0 +1,376 @@
+{
+  "paths": [
+    {
+      "title": "AI/ML Engineer",
+      "summary": "Build intelligent systems by combining algorithmic thinking from C++ with Python-based machine learning libraries to train, evaluate, and deploy models.",
+      "whyItFits": "Your Python foundation provides an immediate bridge to ML tooling (NumPy, PyTorch), while your C++ background ensures strong intuition for performance and systems-level algorithms relevant to your AI interest.",
+      "fitScore": 76,
+      "fitReason": "Strong mathematical and programming foundations with Python and C++, but currently missing linear algebra for deep learning and hands-on ML framework experience.",
+      "skillGaps": [
+        {
+          "skill": "PyTorch & Deep Learning",
+          "importance": "high",
+          "currentLevel": 1,
+          "targetLevel": 4
+        },
+        {
+          "skill": "Applied Mathematics & Linear Algebra",
+          "importance": "high",
+          "currentLevel": 2,
+          "targetLevel": 4
+        },
+        {
+          "skill": "Data Preprocessing & Pandas",
+          "importance": "medium",
+          "currentLevel": 1,
+          "targetLevel": 4
+        },
+        {
+          "skill": "MLOps & Model Deployment (FastAPI/Docker)",
+          "importance": "medium",
+          "currentLevel": 0,
+          "targetLevel": 3
+        }
+      ],
+      "milestones": [
+        {
+          "yearLabel": "Year 1 (Foundations)",
+          "goals": [
+            "Master NumPy, Pandas, and basic scikit-learn classifiers",
+            "Implement linear and logistic regression from scratch using Python"
+          ],
+          "skillsToLearn": ["NumPy", "Pandas", "Scikit-Learn", "Matplotlib"]
+        },
+        {
+          "yearLabel": "Year 2 (Core ML & Deep Learning)",
+          "goals": [
+            "Build CNNs and Transformers using PyTorch",
+            "Participate in Kaggle beginner competitions"
+          ],
+          "skillsToLearn": ["PyTorch", "Computer Vision Basics", "Vector Embeddings"]
+        },
+        {
+          "yearLabel": "Year 3 (Specialization & Systems)",
+          "goals": [
+            "Implement high-throughput inference using C++ TensorRT bindings",
+            "Secure an AI research or engineering summer internship"
+          ],
+          "skillsToLearn": ["TensorRT", "CUDA Basics", "Docker", "FastAPI"]
+        },
+        {
+          "yearLabel": "Year 4 (Graduation & Portfolio)",
+          "goals": [
+            "Complete a production-grade multimodal capstone project",
+            "Target full-time junior ML engineer roles"
+          ],
+          "skillsToLearn": ["Distributed Training", "MLOps", "LLM Fine-tuning"]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Dataset Explorer & Linear Regressor",
+          "description": "Load real-world housing tabular data with Pandas and build a custom gradient-descent regressor from scratch without scikit-learn.",
+          "skillsPracticed": ["Python", "NumPy", "Matplotlib"],
+          "difficulty": "beginner",
+          "weeks": 3
+        },
+        {
+          "name": "Classroom Attention & Vision Classifier",
+          "description": "Train a PyTorch Convolutional Neural Network on public image datasets with data augmentation and real-time inference reporting.",
+          "skillsPracticed": ["PyTorch", "Torchvision", "OpenCV"],
+          "difficulty": "intermediate",
+          "weeks": 6
+        },
+        {
+          "name": "C++ High-Performance Inference Engine",
+          "description": "Deploy an ONNX-quantized classification model via a low-latency C++ server with benchmarking against native Python scripts.",
+          "skillsPracticed": ["C++", "ONNX Runtime", "FastAPI", "Docker"],
+          "difficulty": "advanced",
+          "weeks": 8
+        }
+      ],
+      "first30Days": [
+        {
+          "week": 1,
+          "tasks": [
+            "Set up virtual environment and install NumPy, Pandas, and Jupyter Lab",
+            "Complete 20 vector manipulation exercises in NumPy without Python loops",
+            "Parse and clean a 10,000-row CSV dataset from Kaggle"
+          ]
+        },
+        {
+          "week": 2,
+          "tasks": [
+            "Implement matrix multiplication and mean squared error calculation in pure Python and NumPy",
+            "Code batch gradient descent for single-variable linear regression",
+            "Plot the loss convergence curve using Matplotlib"
+          ]
+        },
+        {
+          "week": 3,
+          "tasks": [
+            "Train baseline LinearRegression and RandomForest models using scikit-learn",
+            "Evaluate models using train-test split, R2 score, and RMSE metrics",
+            "Document insights and publish a well-commented Jupyter notebook on GitHub"
+          ]
+        },
+        {
+          "week": 4,
+          "tasks": [
+            "Package regression model into a standalone Python CLI script with argparse",
+            "Write unit tests with pytest to validate prediction shapes and input bounds",
+            "Outline architecture and datasets for the intermediate PyTorch vision project"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "summary": "Develop responsive modern web applications by combining front-end interfaces with robust backend APIs, database modeling, and server management.",
+      "whyItFits": "Your HTML experience connects directly to modern front-end layouts, while your interest in Web Development and procedural coding in C++ sets up rapid adoption of TypeScript and backend server architecture.",
+      "fitScore": 68,
+      "fitReason": "Clear motivation for Web Development and understanding of HTML syntax, but requires modern CSS frameworks, TypeScript, client-side state management, and relational database mastery.",
+      "skillGaps": [
+        {
+          "skill": "JavaScript / TypeScript",
+          "importance": "high",
+          "currentLevel": 1,
+          "targetLevel": 4
+        },
+        {
+          "skill": "Modern CSS & Tailwind",
+          "importance": "high",
+          "currentLevel": 1,
+          "targetLevel": 4
+        },
+        {
+          "skill": "React & Next.js Ecosystem",
+          "importance": "high",
+          "currentLevel": 0,
+          "targetLevel": 4
+        },
+        {
+          "skill": "PostgreSQL & Database Design",
+          "importance": "medium",
+          "currentLevel": 0,
+          "targetLevel": 3
+        }
+      ],
+      "milestones": [
+        {
+          "yearLabel": "Year 1 (Web Fundamentals)",
+          "goals": [
+            "Deepen semantic HTML and master responsive CSS with Flexbox/Grid",
+            "Learn core JavaScript ES6+ (DOM, promises, async/await)"
+          ],
+          "skillsToLearn": ["Semantic HTML", "Modern CSS", "JavaScript ES6+", "Git"]
+        },
+        {
+          "yearLabel": "Year 2 (Full Stack Frameworks)",
+          "goals": [
+            "Build dynamic single-page applications with React and TypeScript",
+            "Build RESTful APIs with Node.js and PostgreSQL"
+          ],
+          "skillsToLearn": ["TypeScript", "React", "Node.js", "PostgreSQL"]
+        },
+        {
+          "yearLabel": "Year 3 (Production Architectures)",
+          "goals": [
+            "Deploy full stack apps to cloud infrastructure with CI/CD",
+            "Contribute to open-source web tooling and secure summer internships"
+          ],
+          "skillsToLearn": ["Next.js", "Docker", "Prisma/Drizzle", "CI/CD Pipelines"]
+        },
+        {
+          "yearLabel": "Year 4 (Career Launch)",
+          "goals": [
+            "Build a production microservices application with auth and caching",
+            "Interview for full-time Full Stack Software Engineering positions"
+          ],
+          "skillsToLearn": ["System Design", "Redis Caching", "GraphQL", "Web Security"]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Responsive Portfolio & Interactive Quiz",
+          "description": "Construct a responsive multi-page web app using semantic HTML, pure CSS Flexbox, and vanilla JavaScript for dynamic DOM updates.",
+          "skillsPracticed": ["HTML", "CSS", "JavaScript DOM"],
+          "difficulty": "beginner",
+          "weeks": 3
+        },
+        {
+          "name": "Collaborative Study Task Board",
+          "description": "Build a Kanban-style web application using React, TypeScript, and a RESTful Express backend with persistent PostgreSQL storage.",
+          "skillsPracticed": ["TypeScript", "React", "Express", "PostgreSQL"],
+          "difficulty": "intermediate",
+          "weeks": 5
+        },
+        {
+          "name": "Real-Time Campus Marketplace",
+          "description": "Develop an end-to-end Next.js marketplace featuring WebSocket live bidding, JWT session security, and S3 file uploads.",
+          "skillsPracticed": ["Next.js", "TypeScript", "WebSockets", "Docker", "Tailwind CSS"],
+          "difficulty": "advanced",
+          "weeks": 7
+        }
+      ],
+      "first30Days": [
+        {
+          "week": 1,
+          "tasks": [
+            "Code three responsive mobile-first landing page sections using semantic HTML and CSS",
+            "Master CSS Flexbox and Grid through interactive layout challenges",
+            "Push structured web pages to GitHub Pages with live previews"
+          ]
+        },
+        {
+          "week": 2,
+          "tasks": [
+            "Learn JavaScript ES6 syntax: let/const, arrow functions, destructuring, and array methods",
+            "Build an interactive interactive calculator manipulating the DOM dynamically",
+            "Implement local storage persistence for user selections"
+          ]
+        },
+        {
+          "week": 3,
+          "tasks": [
+            "Learn asynchronous JavaScript using fetch, promises, and async/await",
+            "Build a live weather widget fetching data from a free public REST API",
+            "Handle loading states, network errors, and edge case responses cleanly in UI"
+          ]
+        },
+        {
+          "week": 4,
+          "tasks": [
+            "Initialize a React project using Vite and explore component props/state",
+            "Refactor the weather widget into modular React components with TypeScript types",
+            "Write a clean README documenting architecture, setup, and deployed URL"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Engineer",
+      "summary": "Design and maintain high-volume data collection, transformation, and storage pipelines that supply clean data to machine learning models and web dashboards.",
+      "whyItFits": "Your experience with Python data manipulation and analytical thinking aligns naturally with data pipelines, while your C++ memory discipline translates into writing optimized transformation jobs for large datasets.",
+      "fitScore": 58,
+      "fitReason": "Strong foundation in procedural programming with Python and C++, but requires learning relational SQL querying, distributed computing, and workflow orchestration engines.",
+      "skillGaps": [
+        {
+          "skill": "Advanced SQL & Database Schema Design",
+          "importance": "high",
+          "currentLevel": 1,
+          "targetLevel": 4
+        },
+        {
+          "skill": "ETL Pipeline Orchestration (Airflow/Prefect)",
+          "importance": "high",
+          "currentLevel": 0,
+          "targetLevel": 4
+        },
+        {
+          "skill": "Data Warehousing (DuckDB/Snowflake)",
+          "importance": "medium",
+          "currentLevel": 0,
+          "targetLevel": 3
+        },
+        {
+          "skill": "Data Quality Testing & Validation",
+          "importance": "medium",
+          "currentLevel": 0,
+          "targetLevel": 3
+        }
+      ],
+      "milestones": [
+        {
+          "yearLabel": "Year 1 (Data Fundamentals)",
+          "goals": [
+            "Master relational SQL joins, window functions, and indexing",
+            "Automate automated data scraping and extraction using Python"
+          ],
+          "skillsToLearn": ["SQL", "PostgreSQL", "Python Requests", "SQLite"]
+        },
+        {
+          "yearLabel": "Year 2 (Data Modeling & Warehousing)",
+          "goals": [
+            "Design Kimball dimensional schemas with fact and dimension tables",
+            "Transform raw datasets with dbt and DuckDB"
+          ],
+          "skillsToLearn": ["dbt", "DuckDB", "Dimensional Modeling", "Data Formats (Parquet)"]
+        },
+        {
+          "yearLabel": "Year 3 (Distributed Systems & Streaming)",
+          "goals": [
+            "Process millions of records with Apache Spark and PySpark",
+            "Complete an industry data engineering internship"
+          ],
+          "skillsToLearn": ["PySpark", "Apache Airflow", "Kafka", "AWS S3"]
+        },
+        {
+          "yearLabel": "Year 4 (Enterprise Infrastructure)",
+          "goals": [
+            "Deploy fault-tolerant streaming pipelines with automated monitoring",
+            "Interview for full-time Data Engineer positions"
+          ],
+          "skillsToLearn": ["Lakehouse Architecture (Delta Lake)", "Terraform", "CI/CD for Data"]
+        }
+      ],
+      "projects": [
+        {
+          "name": "Automated Financial Data Ingestion CLI",
+          "description": "Write a Python script that polls financial APIs, cleans missing data, and stores structured rows into SQLite with index optimizations.",
+          "skillsPracticed": ["Python", "SQL", "SQLite"],
+          "difficulty": "beginner",
+          "weeks": 3
+        },
+        {
+          "name": "E-Commerce ETL Pipeline with dbt & DuckDB",
+          "description": "Transform 500,000 raw sales records into a clean star schema with dbt tests for nulls, uniqueness, and referential integrity.",
+          "skillsPracticed": ["SQL", "dbt", "DuckDB", "Parquet"],
+          "difficulty": "intermediate",
+          "weeks": 5
+        },
+        {
+          "name": "Distributed Stream Processing Engine",
+          "description": "Build a real-time event pipeline ingesting simulated sensor metrics with Kafka, processing windowed aggregates in PySpark, and persisting to Delta Lake.",
+          "skillsPracticed": ["PySpark", "Kafka", "Docker", "Delta Lake"],
+          "difficulty": "advanced",
+          "weeks": 8
+        }
+      ],
+      "first30Days": [
+        {
+          "week": 1,
+          "tasks": [
+            "Install PostgreSQL locally and practice DDL table creation with foreign keys",
+            "Solve 25 LeetCode SQL problems focusing on inner/left joins and aggregations",
+            "Write a Python script using psycopg to connect and query tables programmatically"
+          ]
+        },
+        {
+          "week": 2,
+          "tasks": [
+            "Learn SQL Window functions (ROW_NUMBER, RANK, LAG, LEAD)",
+            "Ingest a public 50,000-row public transport dataset into PostgreSQL",
+            "Profile slow queries using EXPLAIN ANALYZE and add B-tree indexes to optimize execution"
+          ]
+        },
+        {
+          "week": 3,
+          "tasks": [
+            "Learn columnar storage principles and convert CSV datasets to Parquet using PyArrow",
+            "Benchmark query performance between CSV, JSON, and Parquet using DuckDB",
+            "Implement automated data validation checks for schema drift and null percentages"
+          ]
+        },
+        {
+          "week": 4,
+          "tasks": [
+            "Write a modular Python ETL script that extracts data from an open API, transforms with Pandas, and loads to DuckDB",
+            "Schedule the job with cron and log pipeline status to file with python-logging",
+            "Publish the pipeline repository with complete documentation and architecture diagram"
+          ]
+        }
+      ]
+    }
+  ]
+}
